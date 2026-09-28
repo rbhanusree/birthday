@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Racherla Bhanu Sree | Royal Celebration</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              100: '#FDF6E2',
+              200: '#F9E8B2',
+              300: '#F2D479',
+              400: '#E6BC43',
+              500: '#D4AF37',
+              600: '#AA821C',
+              700: '#805E0E',
+            },
+            royal: {
+              maroon: '#4A0E17',
+              deepWine: '#2C060D',
+              midnight: '#0D0E15',
+              velvet: '#14141E',
+            }
+          },
+          fontFamily: {
+            serif: ['Cinzel', 'Playfair Display', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+            script: ['Great Vibes', 'cursive']
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    /* Protection: Prevent text selection */
+    * {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
+    
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: auto;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d0e15;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #D4AF37, #805E0E);
+      border-radius: 4px;
+    }
+
+    /* Shimmer Gold Gradient Text */
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #FFF6D6 0%, #D4AF37 45%, #AA821C 80%, #F9E8B2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .text-rose-gold {
+      background: linear-gradient(135deg, #FFE4E6 0%, #FDA4AF 50%, #E11D48 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .border-gold-glow {
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.25), inset 0 0 15px rgba(212, 175, 55, 0.15);
+    }
+
+    .glass-card-dark {
+      background: rgba(18, 18, 28, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 175, 55, 0.28);
+    }
+
+    .glass-card-light {
+      background: rgba(255, 253, 248, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+    }
+
+    /* Royal arch shape styling */
+    .royal-arch {
+      border-radius: 50% 50% 16px 16px / 30% 30% 0 0;
+    }
+
+    /* Floating particles canvas layer */
+    #ambient-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 3D tilt card depth effect */
+    .card-preserve-3d {
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    /* Pulse Glow Animation */
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+      50% { box-shadow: 0 0 45px rgba(212, 175, 55, 0.7); }
+    }
+    .animate-pulse-glow {
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+
+    /* Floating gentle animation */
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(0.5deg); }
+    }
+    .animate-float {
+      animation: gentleFloat 5s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-[#0b0c10] text-[#E0E2EC] font-sans antialiased transition-colors duration-500 overflow-x-hidden selection:bg-gold-500/20">
+
+  <!-- Ambient Sparkles & Golden Bokeh Canvas -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Right-click / Copy Toast Notification Alert Box -->
+  <div id="security-toast" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-opacity duration-300 bg-royal-midnight/90 border border-gold-500/50 px-6 py-3 rounded-full text-gold-300 shadow-2xl flex items-center gap-3 backdrop-blur-md">
+    <svg class="w-5 h-5 text-gold-400" fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clip-rule="evenodd"/>
+    </svg>
+    <span class="text-sm font-medium tracking-wide">Protected with Love for Bhanu Sree</span>
+  </div>
+
+  <!-- Top Floating Controls Header -->
+  <nav class="fixed top-4 right-4 sm:right-8 z-40 flex items-center gap-3">
+    <!-- Music Player Button (Web Audio Harp Melody) -->
+    <button id="music-toggle-btn" class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/60 dark:bg-royal-velvet/80 text-gold-400 border border-gold-500/40 hover:border-gold-400 backdrop-blur-md shadow-lg transition-all duration-300 hover:scale-105 active:scale-95" title="Birthday Tune">
+      <span id="music-icon" class="relative flex h-3 w-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-gold-500"></span>
+      </span>
+      <span id="music-status-text" class="text-xs uppercase tracking-wider font-semibold font-serif">Music: ON</span>
+      <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12 0c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+      </svg>
+    </button>
+
+    <!-- Theme Toggle (Dark & Royal Light Ivory Mode) -->
+    <button id="theme-toggle-btn" class="p-2.5 rounded-full bg-black/60 dark:bg-royal-velvet/80 text-gold-400 border border-gold-500/40 hover:border-gold-400 backdrop-blur-md shadow-lg transition-all duration-300 hover:scale-105" title="Toggle Light/Dark Theme">
+      <!-- Sun Icon -->
+      <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+      <!-- Moon Icon -->
+      <svg id="moon-icon" class="w-5 h-5 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-16">
+    
+    <!-- Hero Royal Header -->
+    <header class="text-center max-w-4xl mx-auto pt-8 pb-10">
+      <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-gold-500/30 bg-gold-500/10 mb-6 backdrop-blur-md">
+        <span class="text-gold-400 text-sm">✨</span>
+        <span class="text-xs uppercase tracking-widest text-gold-300 font-semibold">A Royal Tribute From Her Loving Brother</span>
+        <span class="text-gold-400 text-sm">✨</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-extrabold tracking-tight mb-4">
+        <span class="block text-gold-gradient drop-shadow-md">Racherla Bhanu Sree</span>
+      </h1>
+      
+      <p class="font-script text-3xl sm:text-4xl md:text-5xl text-rose-300 dark:text-rose-200/90 mb-4">
+        Happy Birthday, My Dearest Sister!
+      </p>
+
+      <p class="text-sm sm:text-base text-gray-300 dark:text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
+        Born on <strong class="text-gold-300 font-semibold">02-10-2002</strong> • Celebrating Grace, Wisdom & Royal Radiance on <strong class="text-gold-300 font-semibold">October 2nd, 2026</strong>.
+      </p>
+    </header>
+
+    <!-- Royal Countdown Section -->
+    <section class="w-full max-w-5xl my-6">
+      <div class="glass-card-dark rounded-3xl p-6 sm:p-10 border-gold-glow relative overflow-hidden transition-all duration-500">
+        <!-- Background subtle mandala crest -->
+        <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-gold-500/5 blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-rose-500/5 blur-3xl pointer-events-none"></div>
+
+        <div class="text-center mb-8">
+          <span class="text-xs font-serif uppercase tracking-[0.25em] text-gold-400 font-bold block mb-1">
+            Approaching Milestone 24th Year
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-serif text-white dark:text-gold-100 font-bold">
+            Countdown to October 2nd, 2026
+          </h2>
+        </div>
+
+        <!-- 4-Box Countdown Timer Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
+          <!-- Days -->
+          <div class="p-4 sm:p-6 rounded-2xl bg-black/40 border border-gold-500/25 shadow-inner">
+            <span id="cd-days" class="block font-serif text-4xl sm:text-6xl font-black text-gold-gradient">00</span>
+            <span class="text-xs sm:text-sm uppercase tracking-widest text-gray-400 font-medium mt-1 block">Days</span>
+          </div>
+          <!-- Hours -->
+          <div class="p-4 sm:p-6 rounded-2xl bg-black/40 border border-gold-500/25 shadow-inner">
+            <span id="cd-hours" class="block font-serif text-4xl sm:text-6xl font-black text-gold-gradient">00</span>
+            <span class="text-xs sm:text-sm uppercase tracking-widest text-gray-400 font-medium mt-1 block">Hours</span>
+          </div>
+          <!-- Minutes -->
+          <div class="p-4 sm:p-6 rounded-2xl bg-black/40 border border-gold-500/25 shadow-inner">
+            <span id="cd-minutes" class="block font-serif text-4xl sm:text-6xl font-black text-gold-gradient">00</span>
+            <span class="text-xs sm:text-sm uppercase tracking-widest text-gray-400 font-medium mt-1 block">Minutes</span>
+          </div>
+          <!-- Seconds -->
+          <div class="p-4 sm:p-6 rounded-2xl bg-black/40 border border-gold-500/25 shadow-inner">
+            <span id="cd-seconds" class="block font-serif text-4xl sm:text-6xl font-black text-gold-gradient">00</span>
+            <span class="text-xs sm:text-sm uppercase tracking-widest text-gray-400 font-medium mt-1 block">Seconds</span>
+          </div>
+        </div>
+
+        <!-- Interactive Confetti & Rose Petals Trigger Button -->
+        <div class="mt-8 text-center flex flex-wrap justify-center gap-4">
+          <button id="send-wish-btn" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-600 via-gold-500 to-gold-400 text-royal-midnight font-serif font-bold text-sm tracking-wider uppercase shadow-xl hover:shadow-gold-500/50 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2">
+            <span>🌹</span> Shower Sister with Blessings & Flowers
+          </button>
+          <button id="launch-fireworks-btn" class="px-6 py-3.5 rounded-full bg-black/60 hover:bg-black/80 text-gold-300 border border-gold-500/40 font-serif font-semibold text-sm tracking-wider uppercase backdrop-blur-md transition-all duration-300 hover:scale-105 active:scale-95">
+            🎆 Spark Royal Fireworks
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Royal Gallery Section (Multiple Visual Showcase Styles) -->
+    <section class="w-full max-w-6xl my-12">
+      <div class="text-center mb-12">
+        <span class="text-xs font-serif uppercase tracking-[0.3em] text-gold-400 block mb-2">Her Iconic Elegance</span>
+        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-gold-gradient">Portraits of Royalty</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mt-4"></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
+        
+        <!-- Showcase Style 1: Royal Palace Arch Frame (Maroon Silk Saree Portrait) -->
+        <div class="relative group card-preserve-3d flex flex-col items-center">
+          <div class="w-full max-w-md mx-auto p-4 sm:p-6 rounded-3xl bg-gradient-to-b from-royal-maroon/40 via-royal-deepWine/40 to-black/60 border-2 border-gold-500/40 shadow-2xl backdrop-blur-xl relative hover:border-gold-400 transition-all duration-500">
+            <!-- Ornamental Crown Crest Header -->
+            <div class="text-center mb-3">
+              <span class="text-xs uppercase tracking-widest text-gold-300 font-serif font-semibold"> • The Royal Heritage</span>
+            </div>
+
+            <!-- Arch Image Container -->
+            <div class="relative overflow-hidden royal-arch border-2 border-gold-400/50 shadow-2xl bg-black">
+              <img 
+                src="image_f41532.jpg" 
+                alt="Racherla Bhanu Sree in Traditional Royal Silk" 
+                class="w-full h-[500px] object-cover object-top filter brightness-105 contrast-105 transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                onerror="this.onerror=null;this.src='https://placehold.co/600x900/4A0E17/D4AF37?text=Royal+Bhanu+Sree';"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-royal-midnight/80 via-transparent to-transparent opacity-60"></div>
+            </div>
+
+            <!-- Caption Card -->
+            <div class="mt-5 text-center">
+              <h3 class="text-xl font-serif font-bold text-gold-200">Timeless Traditional Grace</h3>
+              <p class="text-xs text-gold-400/80 mt-1 uppercase tracking-wider">Adorned in Imperial Silk & Authentic Splendor</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Showcase Style 2: 3D Crystal Shimmer Tilt Frame (Golden Designer Lehenga Portrait) -->
+        <div class="relative group card-preserve-3d flex flex-col items-center">
+          <div class="w-full max-w-md mx-auto p-4 sm:p-6 rounded-3xl bg-gradient-to-b from-gold-500/10 via-royal-velvet/50 to-black/70 border-2 border-gold-500/40 shadow-2xl backdrop-blur-xl relative hover:border-gold-400 transition-all duration-500">
+            <!-- Ornamental Crown Crest Header -->
+            <div class="text-center mb-3">
+              <span class="text-xs uppercase tracking-widest text-gold-300 font-serif font-semibold"> • Modern Radiance</span>
+            </div>
+
+            <!-- Beveled Card Container -->
+            <div class="relative overflow-hidden rounded-2xl border-2 border-gold-400/50 shadow-2xl bg-black">
+              <img 
+                src="image_f4154f.jpg" 
+                alt="Racherla Bhanu Sree in Sparkling Designer Attire" 
+                class="w-full h-[500px] object-cover object-top filter brightness-105 contrast-105 transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                onerror="this.onerror=null;this.src='https://placehold.co/600x900/14141E/D4AF37?text=Radiant+Bhanu+Sree';"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-royal-midnight/80 via-transparent to-transparent opacity-60"></div>
+            </div>
+
+            <!-- Caption Card -->
+            <div class="mt-5 text-center">
+              <h3 class="text-xl font-serif font-bold text-gold-200">Glimmering Smile & Light</h3>
+              <p class="text-xs text-gold-400/80 mt-1 uppercase tracking-wider">A Heart Filled with Pure Radiance and Joy</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Brother's Special Greetings Letter Section -->
+    <section class="w-full max-w-4xl my-10">
+      <div class="glass-card-dark rounded-3xl p-8 sm:p-12 border-2 border-gold-500/40 relative shadow-2xl">
+        <!-- Corner Ornaments -->
+        <div class="absolute top-4 left-4 text-gold-500/40 font-serif text-xl">⚜</div>
+        <div class="absolute top-4 right-4 text-gold-500/40 font-serif text-xl">⚜</div>
+        <div class="absolute bottom-4 left-4 text-gold-500/40 font-serif text-xl">⚜</div>
+        <div class="absolute bottom-4 right-4 text-gold-500/40 font-serif text-xl">⚜</div>
+
+        <div class="text-center mb-6">
+          <span class="text-xs font-serif uppercase tracking-[0.25em] text-gold-400 font-bold block mb-1">
+            Pure & Eternal Bond
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-serif font-extrabold text-gold-gradient">
+            Heartfelt Greetings From Your Brother
+          </h2>
+        </div>
+
+        <div class="space-y-4 text-gray-200 dark:text-gray-300 font-light text-base sm:text-lg leading-relaxed text-justify sm:text-center px-2 sm:px-6">
+          <p>
+            <strong class="text-gold-300 font-serif">Dear Bhanu Sree,</strong> having you as my sister is one of life’s greatest blessings. From all the laughter we’ve shared to every memory carved in our hearts, your warmth, elegance, and pure heart illuminate our family every single day.
+          </p>
+          <p>
+            As you celebrate this momentous milestone turning <span class="text-gold-300 font-semibold">24</span> on <span class="text-gold-300 font-semibold">October 2nd, 2026</span>, my wish for you is boundless joy, roaring success, serene peace, and health that glows brighter with every sunrise.
+          </p>
+          <p class="font-serif italic text-gold-200 pt-2">
+            "No matter where life takes us, remember your brother always stands beside you as your proudest supporter and protector."
+          </p>
+        </div>
+
+        <!-- Wax Seal & Signature Block -->
+        <div class="mt-8 pt-6 border-t border-gold-500/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <!-- Royal Gold Wax Seal Badge -->
+            <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-gold-700 via-gold-500 to-yellow-200 flex items-center justify-center shadow-lg border-2 border-gold-300 text-royal-midnight font-serif font-black text-xl">
+              RBS
+            </div>
+            <div>
+              <span class="block text-xs uppercase tracking-widest text-gold-400">Honoring With Love</span>
+              <span class="font-serif font-bold text-white text-lg">Racherla Bhanu Sree</span>
+            </div>
+          </div>
+
+          <div class="text-center sm:text-right">
+            <span class="font-script text-3xl text-rose-300 block">With endless love,</span>
+            <span class="text-xs uppercase tracking-widest text-gold-400 font-semibold">Your Loving Brother</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Life & Milestone Trivia Cards -->
+    <section class="w-full max-w-4xl my-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-6 rounded-2xl glass-card-dark border border-gold-500/25 text-center">
+        <span class="text-3xl block mb-2">♎</span>
+        <h4 class="font-serif font-bold text-gold-300 text-lg">Zodiac & Balance</h4>
+        <p class="text-xs text-gray-400 mt-2">Born October 2nd under Libra — symbolized by poise, harmonious grace, aesthetic beauty, and justice.</p>
+      </div>
+
+      <div class="p-6 rounded-2xl glass-card-dark border border-gold-500/25 text-center">
+        <span class="text-3xl block mb-2">👑</span>
+        <h4 class="font-serif font-bold text-gold-300 text-lg">24 Golden Years</h4>
+        <p class="text-xs text-gray-400 mt-2">2002 to 2026: 8,766 days of spreading happiness, kindness, and royal brilliance everywhere.</p>
+      </div>
+
+      <div class="p-6 rounded-2xl glass-card-dark border border-gold-500/25 text-center">
+        <span class="text-3xl block mb-2">🎁</span>
+        <h4 class="font-serif font-bold text-gold-300 text-lg">Brother's Promise</h4>
+        <p class="text-xs text-gray-400 mt-2">An unbroken bond of companionship, constant care, and cheerful celebrations always.</p>
+      </div>
+    </section>
+
+    <!-- Interactive Surprise Message Box -->
+    <section class="w-full max-w-2xl my-10 text-center">
+      <div class="p-8 rounded-3xl border border-gold-500/30 bg-black/40 backdrop-blur-md">
+        <h3 class="font-serif text-2xl font-bold text-gold-gradient mb-3">Brother's Secret Birthday Box</h3>
+        <p class="text-sm text-gray-400 mb-6">Click below to unwrap a special sister tribute quote!</p>
+
+        <button id="surprise-btn" class="px-6 py-3 rounded-full bg-gold-500/20 hover:bg-gold-500/30 border border-gold-400 text-gold-300 font-serif text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:scale-105">
+          🎁 Tap to Unlock Surprise
+        </button>
+
+        <!-- Hidden Surprise Message Container -->
+        <div id="surprise-content" class="hidden mt-6 p-5 rounded-2xl bg-royal-maroon/30 border border-gold-400/40 text-gold-200 font-serif italic text-base animate-pulse-glow">
+          “A sister is both your mirror and your opposite, someone who knows you truly and loves you deeply anyway. Bhanu, you are our family's crown jewel. Happy Birthday!”
+        </div>
+      </div>
+    </section>
+
+    <footer class="w-full text-center py-8 text-xs text-gold-400/70 border-t border-gold-500/10 mt-12">
+      <p>© 2026 Royal Celebration for Racherla Bhanu Sree • Designed with pure devotion by her brother</p>
+    </footer>
+
+  </main>
+
+  <script>
+    /* ==========================================================================
+       1. SECURITY SAFEGUARDS (Disable Right Click, Copy, Download, Shortcuts)
+       ========================================================================== */
+    const toast = document.getElementById('security-toast');
+    let toastTimeout;
+
+    function showProtectionToast() {
+      toast.classList.remove('opacity-0');
+      toast.classList.add('opacity-100');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0');
+      }, 2000);
+    }
+
+    // Disable Right Click (Context Menu)
+    document.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      showProtectionToast();
+      return false;
+    });
+
+    // Disable Copy, Cut, and Paste
+    document.addEventListener('copy', (e) => {
+      e.preventDefault();
+      showProtectionToast();
+      return false;
+    });
+    document.addEventListener('cut', (e) => {
+      e.preventDefault();
+      return false;
+    });
+
+    // Disable Drag & Drop (Prevent dragging images to save)
+    document.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+      return false;
+    });
+
+    // Keyboard Shortcuts Protection (Ctrl+U, Ctrl+S, Ctrl+P, Ctrl+C, F12, Ctrl+Shift+I)
+    document.addEventListener('keydown', (e) => {
+      if (
+        (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'p' || e.key === 'c' || e.key === 'a')) ||
+        (e.key === 'F12') ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))
+      ) {
+        e.preventDefault();
+        showProtectionToast();
+        return false;
+      }
+    });
+
+    /* ==========================================================================
+       2. LIVE COUNTDOWN TIMER TO OCTOBER 2nd, 2026
+       ========================================================================== */
+    const targetDate = new Date('2026-10-02T00:00:00+05:30').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        document.getElementById('cd-days').innerText = '00';
+        document.getElementById('cd-hours').innerText = '00';
+        document.getElementById('cd-minutes').innerText = '00';
+        document.getElementById('cd-seconds').innerText = '00';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+      document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('cd-minutes').innerText = String(minutes).padStart(2, '0');
+      document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    /* ==========================================================================
+       3. AMBIENT GOLD SPARKLES & BOKEH PARTICLES (Canvas)
+       ========================================================================== */
+    const canvas = document.getElementById('ambient-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = Math.random() * 2.2 + 0.6;
+        this.alpha = Math.random() * 0.7 + 0.2;
+        this.speedY = -(Math.random() * 0.4 + 0.1);
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.color = Math.random() > 0.3 ? '#D4AF37' : '#F9E8B2';
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        if (this.y < 0) {
+          this.y = canvas.height;
+          this.x = Math.random() * canvas.width;
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.alpha;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#D4AF37';
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
+        ctx.shadowBlur = 0;
+      }
+    }
+
+    for (let i = 0; i < 45; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    /* ==========================================================================
+       4. SYNTHESIZED ROYAL BIRTHDAY MELODY (Web Audio API)
+       Self-contained sound: No external MP3 downloads needed, guaranteed to play!
+       ========================================================================== */
+    let audioCtx = null;
+    let isPlaying = false;
+    let melodyTimer = null;
+
+    // "Happy Birthday To You" Notes & Timings
+    const birthdayNotes = [
+      { note: 'G4', dur: 0.35 }, { note: 'G4', dur: 0.35 }, { note: 'A4', dur: 0.7 }, { note: 'G4', dur: 0.7 },
+      { note: 'C5', dur: 0.7 },  { note: 'B4', dur: 1.2 },
+      { note: 'G4', dur: 0.35 }, { note: 'G4', dur: 0.35 }, { note: 'A4', dur: 0.7 }, { note: 'G4', dur: 0.7 },
+      { note: 'D5', dur: 0.7 },  { note: 'C5', dur: 1.2 },
+      { note: 'G4', dur: 0.35 }, { note: 'G4', dur: 0.35 }, { note: 'G5', dur: 0.7 }, { note: 'E5', dur: 0.7 },
+      { note: 'C5', dur: 0.7 },  { note: 'B4', dur: 0.7 },  { note: 'A4', dur: 1.0 },
+      { note: 'F5', dur: 0.35 }, { note: 'F5', dur: 0.35 }, { note: 'E5', dur: 0.7 }, { note: 'C5', dur: 0.7 },
+      { note: 'D5', dur: 0.7 },  { note: 'C5', dur: 1.5 }
+    ];
+
+    const noteFrequencies = {
+      'G4': 392.00, 'A4': 440.00, 'B4': 493.88,
+      'C5': 523.25, 'D5': 587.33, 'E5': 659.25,
+      'F5': 698.46, 'G5': 783.99
+    };
+
+    function playChime(freq, duration) {
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'triangle'; // Sweet harp chime timbre
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+      gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    }
+
+    function startMelodyLoop() {
+      if (isPlaying) return;
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      isPlaying = true;
+      document.getElementById('music-status-text').innerText = 'Music: ON';
+
+      let step = 0;
+      function nextNote() {
+        if (!isPlaying) return;
+        const current = birthdayNotes[step];
+        const freq = noteFrequencies[current.note];
+        playChime(freq, current.dur);
+
+        step = (step + 1) % birthdayNotes.length;
+        melodyTimer = setTimeout(nextNote, current.dur * 1000 + 120);
+      }
+      nextNote();
+    }
+
+    function stopMelodyLoop() {
+      isPlaying = false;
+      clearTimeout(melodyTimer);
+      document.getElementById('music-status-text').innerText = 'Music: OFF';
+    }
+
+    // Toggle Music Button
+    const musicBtn = document.getElementById('music-toggle-btn');
+    musicBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        stopMelodyLoop();
+      } else {
+        startMelodyLoop();
+      }
+    });
+
+    // Auto-play listener: Modern browsers require an initial user interaction.
+    // We attach an automatic trigger on first scroll, click or keypress to immediately start music.
+    function autoStartAudio() {
+      if (!isPlaying) {
+        startMelodyLoop();
+      }
+      ['click', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
+        window.removeEventListener(evt, autoStartAudio);
+      });
+    }
+    ['click', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
+      window.addEventListener(evt, autoStartAudio, { once: true });
+    });
+
+    /* ==========================================================================
+       5. THEME TOGGLE (Dark Mode & Royal Light Mode)
+       ========================================================================== */
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    const htmlEl = document.documentElement;
+
+    themeBtn.addEventListener('click', () => {
+      if (htmlEl.classList.contains('dark')) {
+        htmlEl.classList.remove('dark');
+        document.body.classList.remove('bg-[#0b0c10]', 'text-[#E0E2EC]');
+        document.body.classList.add('bg-[#FFFDF7]', 'text-[#2C1810]');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        htmlEl.classList.add('dark');
+        document.body.classList.remove('bg-[#FFFDF7]', 'text-[#2C1810]');
+        document.body.classList.add('bg-[#0b0c10]', 'text-[#E0E2EC]');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      }
+    });
+
+    /* ==========================================================================
+       6. INTERACTIVE CELEBRATION BUTTONS (Confetti & Petal Showers)
+       ========================================================================== */
+    const sendWishBtn = document.getElementById('send-wish-btn');
+    sendWishBtn.addEventListener('click', () => {
+      // Golden confetti burst
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 80,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#D4AF37', '#FFD700', '#FF69B4', '#FFF']
+        });
+      }
+      showProtectionToast();
+      toast.querySelector('span').innerText = "Warm blessings & roses sent to Bhanu Sree! 💖";
+    });
+
+    const fireworksBtn = document.getElementById('launch-fireworks-btn');
+    fireworksBtn.addEventListener('click', () => {
+      if (typeof confetti === 'function') {
+        const count = 200;
+        const defaults = { origin: { y: 0.7 } };
+
+        function fire(particleRatio, opts) {
+          confetti(Object.assign({}, defaults, opts, {
+            particleCount: Math.floor(count * particleRatio)
+          }));
+        }
+
+        fire(0.25, { spread: 26, startVelocity: 55, colors: ['#D4AF37', '#F3E5AB'] });
+        fire(0.2, { spread: 60, colors: ['#E11D48', '#FDA4AF'] });
+        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8, colors: ['#D4AF37', '#FFFFFF'] });
+        fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, colors: ['#AA821C', '#E6BC43'] });
+        fire(0.1, { spread: 120, startVelocity: 45, colors: ['#FFF', '#FFD700'] });
+      }
+    });
+
+    /* ==========================================================================
+       7. SURPRISE MESSAGE UNLOCK ACCORDION
+       ========================================================================== */
+    const surpriseBtn = document.getElementById('surprise-btn');
+    const surpriseContent = document.getElementById('surprise-content');
+
+    surpriseBtn.addEventListener('click', () => {
+      if (surpriseContent.classList.contains('hidden')) {
+        surpriseContent.classList.remove('hidden');
+        surpriseBtn.innerText = "✨ Surprise Revealed With Love";
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 50,
+            spread: 60,
+            origin: { y: 0.8 }
+          });
+        }
+      } else {
+        surpriseContent.classList.add('hidden');
+        surpriseBtn.innerText = "🎁 Tap to Unlock Surprise";
+      }
+    });
+  </script>
+</body>
+</html>
